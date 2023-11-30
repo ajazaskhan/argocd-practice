@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
 
-      image 'ashaik65/maven-anis-docker-agent:v1'
+      image 'maven'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -37,7 +37,7 @@ pipeline {
       environment {
 
         
-        DOCKER_IMAGE = "ashaik65/argocd-app:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "ajaz9565/argocd-app:${BUILD_NUMBER}"
 
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
@@ -53,8 +53,8 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "jenkins-argocd"
-            GIT_USER_NAME = "ashaik65"
+            GIT_REPO_NAME = "argocd-practice"
+            GIT_USER_NAME = "ajazaskhan"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
